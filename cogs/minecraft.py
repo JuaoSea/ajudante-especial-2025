@@ -18,7 +18,7 @@ class Minecraft(commands.Cog):
         embed_msg = discord.Embed(title="Minecraft gameplay",
                                   description=f"*Olá caro {target.mention}! JuaoSea te chama para uma jogatina de minezin,"
                                               f" aceitas?* \n \n "
-                                              f"**Entre na call:  [🎮 NOBREZA 🎮](https://discord.gg/e6GV8wk75D)**",
+                                              f"**Entre na call:  [🎮 NOBREZA 🎮](https://discord.gg/qCNz7HSXsK)**",
                                   colour=7448644)
 
         embed_msg.set_author(name="Convite de JuaoSea")
