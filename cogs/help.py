@@ -22,6 +22,7 @@ class Help(commands.Cog):
                                                      '\n >convite '
                                                      '\n >music '
                                                      '\n >dev '
+                                                     '\n >mods'
                                                      '\n >info*', inline=False)
 
         await ctx.reply(embed=embed_link)
@@ -58,6 +59,7 @@ class Help(commands.Cog):
                                                     "\n **>ban + @User + Motivo ** "
                                                     "\n **>ping**"
                                                     "\n **>server**"
+                                                    "\n **>noitada**"
                                                     "\n **>manager**", inline=False)
 
         await ctx.reply(embed=embed_dev)
@@ -78,6 +80,44 @@ class Help(commands.Cog):
                             inline=False)
 
         await ctx.reply(embed=embed)
+        
+    @commands.command(name="noitada")
+    @commands.has_permissions(administrator=True)
+    async def noitada(self, ctx):
+        nn = ctx.author.mention
+
+        embed_noite = discord.Embed(title="Help Noitada", description=f"*{nn} tá ai os comandos da noitada*",
+                                    colour=6606329)
+
+        embed_noite.set_author(name="Ajudante Especial")
+        embed_noite.set_thumbnail(url='https://media3.giphy.com/media/3oFzm9LanEHllG3icE/giphy.gif')
+        embed_noite.add_field(name="Comandos:", value="**/valorant "
+                                                      "\n /mine "
+                                                      "\n /ron**",
+                              inline=False)
+
+        await ctx.send(embed=embed_noite)
+        
+    @commands.command(name="manager")
+    @commands.has_permissions(administrator=True)
+    async def manager(self, ctx):
+        LINK1 = config("link1")
+        LINK2 = config("link2")
+
+        nn = ctx.author.mention
+
+        embed_man = discord.Embed(title="Manager", description=f"*{nn}, tá ai os links de manutenção*",
+                                  colour=7064575)
+
+        embed_man.set_author(name="Ajudante Especial")
+        embed_man.set_thumbnail(url='https://c.tenor.com/zWnTBUB0_kUAAAAC/michael-scott-the-manager.gif')
+        embed_man.add_field(name="Links:", value="**Autorizar bot no server:** {}"
+                                                 "\n"
+                                                 "\n **Discord developer portal:** {}".format(LINK1, LINK2),
+                            inline=False)
+
+        await ctx.send(embed=embed_man)
+
 
 async def setup(bot):
     await bot.add_cog(Help(bot))
