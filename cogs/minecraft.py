@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 from decouple import config
 
-user_id = config("user_id")
-owner_id = config("owner_id")
+user_id = config("user_id")  # ID do usuário autorizado
+owner_id = config("owner_id")  # ID do dono do bot
 
 class DropDown(discord.ui.Select):
     def __init__(self, bot):
@@ -30,20 +30,17 @@ class DropDown(discord.ui.Select):
             await interaction.response.send_message('Confirmado ✅')  # Primeira resposta obrigatória
             await interaction.followup.send(embed=embed_1)  # Mensagem adicional
 
-            # Agora você tem acesso ao bot dentro de DropDown
             try:
-                target = await self.bot.fetch_user(user_id)  # Usando a instância bot
                 target2 = await self.bot.fetch_user(owner_id)  # Usando a instância bot
-                await target2.send(f'{target2.mention}, {target.mention} aceitou o convite (Minecraft) ✅')
+                await target2.send(f'{target2.mention}, {interaction.user.mention} aceitou o convite (Minecraft) ✅')
             except Exception as e:
                 print(f"Erro ao enviar mensagem privada: {e}")
 
         elif res == '2':
             await interaction.response.send_message('Okay, vai tomar no seu cu então porra 👌')
             try:
-                target = await self.bot.fetch_user(user_id)  # Usando a instância bot
                 target2 = await self.bot.fetch_user(owner_id)  # Usando a instância bot
-                await target2.send(f'{target2.mention}, {target.mention} não aceitou o convite (Minecraft) ❌')
+                await target2.send(f'{target2.mention}, {interaction.user.mention} não aceitou o convite (Minecraft) ❌')
             except Exception as e:
                 print(f"Erro ao enviar mensagem privada: {e}")
         elif res == '3':
@@ -55,9 +52,8 @@ class DropDown(discord.ui.Select):
             await interaction.response.send_message('Confirmado ✅')  # Primeira resposta obrigatória
             await interaction.followup.send(embed=embed_2)  # Mensagem adicional
             try:
-                target = await self.bot.fetch_user(user_id)  # Usando a instância bot
                 target2 = await self.bot.fetch_user(owner_id)  # Usando a instância bot
-                await target2.send(f'{target2.mention}, {target.mention} aceitou o convite daqui a algumas horas (Minecraft) 🕑')
+                await target2.send(f'{target2.mention}, {interaction.user.mention} aceitou o convite daqui a algumas horas (Minecraft) 🕑')
             except Exception as e:
                 print(f"Erro ao enviar mensagem privada: {e}")
 
@@ -70,22 +66,30 @@ class Minecraft(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name="mine")
-    @commands.has_permissions(administrator=True)
-    async def mine(self, ctx):
-        target = await self.bot.fetch_user(user_id)
+    # Transformando para Slash Command
+    @discord.app_commands.command(name="mine", description="Convite para uma jogatina de Minecraft")
+    async def mine(self, interaction: discord.Interaction, user: discord.User):
+        role_name = "REI"  # Substitua pelo nome do cargo
+        has_role = any(role.name == role_name for role in interaction.user.roles)
+        
+        if not has_role:
+            await interaction.response.send_message("Você não tem permissão para usar este comando.", ephemeral=True)
+            return
+        
+        # 'user' agora é o target que foi passado no comando /mine <ID>
+        target = user  # Pegando o usuário que foi especificado no comando
         target2 = await self.bot.fetch_user(owner_id)  # Usando a instância bot
  
         embed_msg = discord.Embed(
-            title="Valorant noitada",
-            description=f"*Olá caro {target.mention}! {target2} te chama para uma jogatina de valoras, aceitas?*",
+            title="Minecraft noitada",
+            description=f"*Olá caro {target.mention}! {target2} te chama para uma jogatina de Minecraft, aceitas?*",
             colour=7448644
-            )
+        )
         embed_msg.set_author(name=f"Convite de {target2}")
         embed_msg.set_image(url="https://i.gifer.com/7FOW.gif")
         embed_msg.set_thumbnail(url="https://cdn.icon-icons.com/icons2/2699/PNG/512/minecraft_logo_icon_168974.png")
         
-        await ctx.reply(f'{ctx.author.mention}! Convite de noitada enviado com sucesso')
+        await interaction.response.send_message(f'{interaction.user.mention}! Convite de noitada enviado com sucesso para {target.mention}')
         await target.send(embed=embed_msg, view=DropView(self.bot))  # Passando o bot para DropView
 
 async def setup(bot):
