@@ -10,8 +10,6 @@ class Help(commands.Cog):
 
     @commands.command()
     async def h(self, ctx):
-        nn = ctx.author.mention
-
         embed_link = discord.Embed(title="Help", 
                                    description=f"*Já que o burrinho do {ctx.author.mention} não sabe os comandos tá ai uma lista:*",
                                    colour=6606329)
@@ -30,10 +28,8 @@ class Help(commands.Cog):
 
     @commands.command()
     async def music(self, ctx):
-        nn = ctx.author.mention
-
         embed_music = discord.Embed(title="Help Music",
-                                    description=f"*{nn} tá ai os comandos do bot de música!*",
+                                    description=f"*{ctx.author.mention} tá ai os comandos do bot de música!*",
                                     colour=6606329)
 
         embed_music .set_author(name="Ajudante Especial")
@@ -51,9 +47,7 @@ class Help(commands.Cog):
     @commands.command()
     @commands.has_permissions(administrator=True)
     async def dev(self, ctx):
-        nn = ctx.author.mention
-
-        embed_dev = discord.Embed(title="Help Dev", description=f"*{nn} tá ai os comandos de desenvolvedor do bot*",
+        embed_dev = discord.Embed(title="Help Dev", description=f"*{ctx.author.mention} tá ai os comandos de desenvolvedor do bot*",
                                   colour=6606329)
 
         embed_dev.set_author(name="Ajudante Especial")
