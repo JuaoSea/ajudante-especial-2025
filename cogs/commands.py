@@ -34,6 +34,18 @@ class Commands(commands.Cog):
         embed_link.add_field(name="Link:", value='https://discord.gg/TrasB5W', inline=False)
 
         await ctx.reply(embed=embed_link)
+        
+    @commands.command()
+    async def mods(self, ctx):
+        embed_mods = discord.Embed(description=f"{ctx.author.mention} toma o link dos mods ai, canalha!",
+                                   colour=4282919)
+
+        embed_mods.set_author(name="Ajudante Especial")
+        embed_mods.set_image(url='https://i.gifer.com/ZS1p.gif')
+        embed_mods.add_field(name="Link:", value='https://drive.google.com/drive/folders/1yA7lIDx_8pV7s18x4piAua27Al95JtvJ?usp=drive_link', 
+                             inline=False)
+
+        await ctx.reply(embed=embed_mods)
 
 
 async def setup(bot):
