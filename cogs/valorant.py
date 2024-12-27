@@ -56,7 +56,7 @@ class DropDown(discord.ui.Select):
 
 class DropView(discord.ui.View):
     def __init__(self, bot):
-        super().__init__()
+        super().__init__(timeout=None)
         self.add_item(DropDown(bot))
 
 class Valorant(commands.Cog):

@@ -56,7 +56,7 @@ class DropDown(discord.ui.Select):
 
 class DropView(discord.ui.View):
     def __init__(self, bot):
-        super().__init__()
+        super().__init__(timeout=None)  # O menu nunca expira automaticamente
         self.add_item(DropDown(bot))
 
 class Minecraft(commands.Cog):

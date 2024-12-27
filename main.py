@@ -17,7 +17,7 @@ async def on_ready():
     
     print(f'Logged on as {bot.user}!')
     
-    atividade = discord.Game(name="v2.2 ✅")
+    atividade = discord.Game(name="v2.2.1 ✅")
     #atividade = discord.Game(name="⚠️ WORKING IN PROGRESS ⚠️")
     await bot.change_presence(status=discord.Status.online, activity=atividade)
 
