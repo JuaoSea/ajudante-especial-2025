@@ -24,11 +24,6 @@ Este projeto foi desenvolvido por [@JuaoSea](https://github.com/JuaoSea).
 - [💡 Sobre o Projeto](#sobre)
 - [📦 Requisitos](#requisitos)
 - [⚙️ Instalação](#instalacao)
-- [🔐 Configuração](#configuracao)
-- [▶️ Execução](#execucao)
-- [🗂️ Estrutura](#estrutura)
-- [🤝 Contribuindo](#contribuindo)
-- [📄 Licença](#licenca)
 
 ## 💡 Sobre o Projeto <a name="sobre"></a>
 
