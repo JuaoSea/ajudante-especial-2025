@@ -1,2 +1,4 @@
 /.env
 /discloud.config
+/gitignore
+/.venv
